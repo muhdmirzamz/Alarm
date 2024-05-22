@@ -8,11 +8,18 @@
 import UIKit
 
 class SignupViewController: UIViewController {
+    
+    @IBOutlet var emailTextfield: UITextField!
+    @IBOutlet var passwordTextfield: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func signup() {
+        
     }
     
 
