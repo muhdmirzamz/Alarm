@@ -1,4 +1,5 @@
 Alarm/GoogleService-Info.plist
 /Packages
 xcuserdata/
+Alarm.xcodeproj/xcshareddata/
 *.DS_Store 
