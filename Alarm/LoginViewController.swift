@@ -7,7 +7,12 @@
 
 import UIKit
 
+import FirebaseAuth
+
 class LoginViewController: UIViewController {
+    
+    @IBOutlet var emailTxtfield: UITextField!
+    @IBOutlet var passwordTxtfield: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,6 +20,27 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func login() {
+        guard let email = self.emailTxtfield.text else {
+            return
+        }
+        
+        guard let password = self.passwordTxtfield.text else {
+            return
+        }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if let _ = result {
+                guard let navController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NavigationController") as? UINavigationController else {
+                    return
+                }
+                
+                navController.modalPresentationStyle = .fullScreen
+                
+                self.present(navController, animated: true)
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation
