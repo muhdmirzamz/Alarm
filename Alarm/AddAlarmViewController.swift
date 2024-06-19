@@ -7,12 +7,44 @@
 
 import UIKit
 
+import FirebaseAuth
+import FirebaseDatabase
+
 class AddAlarmViewController: UIViewController {
+    
+    @IBOutlet var textfield: UITextField!
+    
+    var alarmArr: [Alarm] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func addAlarm() {
+        
+        let ref = Database.database().reference()
+        
+        guard let todo = self.textfield.text else {
+            return
+        }
+        
+        guard let userId = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        guard let key = ref.child("/alarms/\(userId)").childByAutoId().key else {
+            return
+        }
+        
+        var todoDict: [String : [String : String]] = [:]
+        
+        todoDict[key] = ["name": todo, "timestamp": "timestamp"]
+        
+        ref.child("/alarms/\(userId)").setValue(todoDict)
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
 
