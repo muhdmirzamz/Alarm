@@ -10,6 +10,7 @@
 		AA090FE22C11969900FE5A02 /* AlarmListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA090FE12C11969900FE5A02 /* AlarmListTableViewController.swift */; };
 		AA090FE42C11973000FE5A02 /* AddAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA090FE32C11973000FE5A02 /* AddAlarmViewController.swift */; };
 		AA1253432C2288F400EDE4FD /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1253422C2288F400EDE4FD /* Alarm.swift */; };
+		AA5BEC0A2C2F97B900BEC39E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5BEC092C2F97B900BEC39E /* Utilities.swift */; };
 		AAAB61E02BFB174700AB0157 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAB61DF2BFB174700AB0157 /* AppDelegate.swift */; };
 		AAAB61E22BFB174700AB0157 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAB61E12BFB174700AB0157 /* SceneDelegate.swift */; };
 		AAAB61E72BFB174700AB0157 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AAAB61E62BFB174700AB0157 /* Base */; };
@@ -26,6 +27,7 @@
 		AA090FE12C11969900FE5A02 /* AlarmListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListTableViewController.swift; sourceTree = "<group>"; };
 		AA090FE32C11973000FE5A02 /* AddAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
 		AA1253422C2288F400EDE4FD /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		AA5BEC092C2F97B900BEC39E /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		AAAB61DC2BFB174700AB0157 /* Alarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAAB61DF2BFB174700AB0157 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAAB61E12BFB174700AB0157 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				AAAB61ED2BFB174800AB0157 /* Info.plist */,
 				AA090FE12C11969900FE5A02 /* AlarmListTableViewController.swift */,
 				AA1253422C2288F400EDE4FD /* Alarm.swift */,
+				AA5BEC092C2F97B900BEC39E /* Utilities.swift */,
 			);
 			path = Alarm;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 				AA090FE22C11969900FE5A02 /* AlarmListTableViewController.swift in Sources */,
 				AAAB61E02BFB174700AB0157 /* AppDelegate.swift in Sources */,
 				AA1253432C2288F400EDE4FD /* Alarm.swift in Sources */,
+				AA5BEC0A2C2F97B900BEC39E /* Utilities.swift in Sources */,
 				AAAB61E22BFB174700AB0157 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
