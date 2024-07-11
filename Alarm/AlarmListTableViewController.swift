@@ -7,6 +7,7 @@
 
 import UIKit
 
+import FirebaseAuth
 import FirebaseDatabase
 
 class AlarmListTableViewController: UITableViewController {
@@ -24,7 +25,43 @@ class AlarmListTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-    
+        
+        self.alarmArr.removeAll()
+        
+        let ref = Database.database().reference()
+        
+        guard let userid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        ref.child("/alarms").child(userid).observeSingleEvent(of: .value) { snapshot in
+            if let alarmsDict = snapshot.value as? Dictionary<String, Any> {
+                for i in alarmsDict {
+                    
+                    guard let alarmDict = i.value as? Dictionary<String, Any> else {
+                        return
+                    }
+                    
+                    guard let alarmName = alarmDict["name"] as? String else {
+                        return
+                    }
+                    
+                    guard let alarmTimestamp = alarmDict["timestamp"] as? String else {
+                        return
+                    }
+                    
+                    let alarmObj = Alarm()
+                    
+                    alarmObj.key = i.key
+                    alarmObj.alarmName = alarmName
+                    alarmObj.timestamp = alarmTimestamp
+                    
+                    self.alarmArr.append(alarmObj)
+                }
+                
+                self.tableView.reloadData()
+            }
+        }
     }
     
     // MARK: - Table view data source

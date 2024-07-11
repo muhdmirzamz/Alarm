@@ -1,5 +1,8 @@
 # CHANGELOG
 
+11 July 2024
+- you can now retrieve items from the database
+
 19 June 2024
 - password field in the login screen is now changed to a secure textfield type
 - you can now add an alarm to the database
