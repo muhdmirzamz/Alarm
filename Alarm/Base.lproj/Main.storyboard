@@ -153,27 +153,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Suj-hy-7gO">
-                                <rect key="frame" x="107" y="216" width="178" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Suj-hy-7gO">
+                                <rect key="frame" x="93" y="220" width="206" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lvs-Dq-5RN">
-                                <rect key="frame" x="169" y="284" width="55" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lvs-Dq-5RN">
+                                <rect key="frame" x="169" y="330" width="55" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Add"/>
                                 <connections>
                                     <action selector="addAlarm" destination="a0L-KI-i9N" eventType="touchUpInside" id="oUT-uj-bvO"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zD0-MZ-9p6">
+                                <rect key="frame" x="29" y="408" width="224" height="36"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="doSomethingWithSender:forEvent:" destination="a0L-KI-i9N" eventType="valueChanged" id="kgQ-Pc-aEc"/>
+                                </connections>
+                            </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kNE-kQ-kuF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kNE-kQ-kuF" firstAttribute="trailing" secondItem="lvs-Dq-5RN" secondAttribute="trailing" constant="169" id="F1x-yI-fGu"/>
+                            <constraint firstItem="kNE-kQ-kuF" firstAttribute="trailing" secondItem="Suj-hy-7gO" secondAttribute="trailing" constant="94" id="JDb-Io-YSu"/>
+                            <constraint firstItem="lvs-Dq-5RN" firstAttribute="leading" secondItem="kNE-kQ-kuF" secondAttribute="leading" constant="169" id="Ut8-KF-M5u"/>
+                            <constraint firstItem="Suj-hy-7gO" firstAttribute="leading" secondItem="kNE-kQ-kuF" secondAttribute="leading" constant="93" id="WjL-6d-XMn"/>
+                            <constraint firstItem="lvs-Dq-5RN" firstAttribute="top" secondItem="Suj-hy-7gO" secondAttribute="bottom" constant="76" id="jos-G5-BTX"/>
+                            <constraint firstItem="Suj-hy-7gO" firstAttribute="top" secondItem="kNE-kQ-kuF" secondAttribute="top" constant="117" id="qTY-gh-FHJ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cVD-rH-JY0"/>
                     <connections>
+                        <outlet property="datePicker" destination="zD0-MZ-9p6" id="cLv-xf-c7E"/>
                         <outlet property="textfield" destination="Suj-hy-7gO" id="hEg-Zd-OP5"/>
                     </connections>
                 </viewController>

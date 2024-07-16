@@ -14,12 +14,26 @@ class AddAlarmViewController: UIViewController {
     
     @IBOutlet var textfield: UITextField!
     
+    @IBOutlet var datePicker: UIDatePicker!
+    
     var alarmArr: [Alarm] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func doSomething(sender: UIDatePicker, forEvent event: UIEvent) {
+        let date = sender.date
+        
+        print("Date chosen: \(date)")
+        
+        let utilities = Utilities()
+        
+        let formattedDate = utilities.getStringForDate(date: sender.date)
+        
+        print("Date chosen (formatted): \(formattedDate)")
     }
     
     @IBAction func addAlarm() {

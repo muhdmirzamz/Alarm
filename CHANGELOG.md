@@ -1,5 +1,8 @@
 # CHANGELOG
 
+16 July 2024
+- Implemented ```UIDatePicker```. You can now select the date and time of the alarm
+
 11 July 2024
 - you can now retrieve items from the database
 
