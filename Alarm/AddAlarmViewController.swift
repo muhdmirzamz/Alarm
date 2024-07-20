@@ -13,10 +13,11 @@ import FirebaseDatabase
 class AddAlarmViewController: UIViewController {
     
     @IBOutlet var textfield: UITextField!
-    
     @IBOutlet var datePicker: UIDatePicker!
     
     var alarmArr: [Alarm] = []
+    
+    var formattedTimestamp = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,16 +25,14 @@ class AddAlarmViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func doSomething(sender: UIDatePicker, forEvent event: UIEvent) {
+    @IBAction func pickerValueChanged(sender: UIDatePicker, forEvent event: UIEvent) {
         let date = sender.date
-        
         print("Date chosen: \(date)")
         
         let utilities = Utilities()
+        self.formattedTimestamp = utilities.getStringForDate(date: sender.date)
         
-        let formattedDate = utilities.getStringForDate(date: sender.date)
-        
-        print("Date chosen (formatted): \(formattedDate)")
+        print("Date chosen (formatted): \(formattedTimestamp)")
     }
     
     @IBAction func addAlarm() {
@@ -54,7 +53,7 @@ class AddAlarmViewController: UIViewController {
         
         var todoDict: [String : [String : String]] = [:]
         
-        todoDict[key] = ["name": todo, "timestamp": "timestamp"]
+        todoDict[key] = ["name": todo, "timestamp": self.formattedTimestamp]
         
         ref.child("/alarms/\(userId)").setValue(todoDict)
         
