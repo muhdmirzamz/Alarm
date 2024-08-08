@@ -11,5 +11,6 @@ class Alarm {
     var key: String?
     
     var alarmName: String?
+//    var count: Int?
     var timestamp: String?
 }
