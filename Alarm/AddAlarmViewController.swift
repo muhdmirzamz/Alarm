@@ -23,6 +23,13 @@ class AddAlarmViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // set default date and time by getting the default date and time from the date picker
+        let utilities = Utilities()
+        self.formattedTimestamp = utilities.getStringForDate(date: self.datePicker.date)
+        
+        print("curr timestamp: \(self.formattedTimestamp)")
+        
     }
     
     @IBAction func pickerValueChanged(sender: UIDatePicker, forEvent event: UIEvent) {
@@ -51,9 +58,30 @@ class AddAlarmViewController: UIViewController {
             return
         }
         
-        var todoDict: [String : [String : String]] = [:]
+        // create a starting dictionary with the new element having count 0
+        let todoDict: NSMutableDictionary = [
+            key: [
+                "name": todo,
+//                "order": 0,
+                "timestamp": self.formattedTimestamp
+            ]
+        ]
         
-        todoDict[key] = ["name": todo, "timestamp": self.formattedTimestamp]
+        // start the next element with count 1
+//        var count = 1
+        
+        // loop through the existing array
+        for todo in self.alarmArr {
+            let newDict: [String: Any] = [
+                "name": todo.alarmName!,
+//                "order": count,
+                "timestamp": todo.timestamp!
+            ]
+            
+//            count += 1
+            
+            todoDict.setValue(newDict, forKey: todo.key!)
+        }
         
         ref.child("/alarms/\(userId)").setValue(todoDict)
         

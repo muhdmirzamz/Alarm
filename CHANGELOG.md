@@ -1,5 +1,10 @@
 # CHANGELOG
 
+8 Aug 2024
+- You can now create multiple alarm entries
+- A default date and time will be set if the user does not use the date time picker
+- Not using ```count``` variable for now
+
 20 July 2024
 - You can now select a date and the alarm can be pushed to the database
 
