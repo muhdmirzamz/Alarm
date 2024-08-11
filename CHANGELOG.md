@@ -1,5 +1,9 @@
 # CHANGELOG
 
+11 Aug 2024
+- Alarm notifications can now fire successfully
+- Introduced a new Alarm variable called ```enabled```
+
 8 Aug 2024
 - You can now create multiple alarm entries
 - A default date and time will be set if the user does not use the date time picker

@@ -7,6 +7,8 @@
 
 import UIKit
 
+import UserNotifications
+
 import FirebaseAuth
 import FirebaseDatabase
 
@@ -46,7 +48,7 @@ class AddAlarmViewController: UIViewController {
         
         let ref = Database.database().reference()
         
-        guard let todo = self.textfield.text else {
+        guard let alarmName = self.textfield.text else {
             return
         }
         
@@ -58,11 +60,55 @@ class AddAlarmViewController: UIViewController {
             return
         }
         
+        // create notification content
+        let content = UNMutableNotificationContent()
+        content.title = alarmName
+        content.body = "ALARM"
+        content.sound = UNNotificationSound.default
+        
+        
+        let utilities = Utilities()
+        
+        // you need the dateComponents for the notification trigger
+        // to get that, you get the date object from converting the date string
+        let selectedDate = utilities.getDateFromDateString(dateString: self.formattedTimestamp)
+        
+        // extract the components from that date object
+        let calendar = Calendar.current
+        let selectedDateYear = calendar.component(.year, from: selectedDate)
+        let selectedDateMonth = calendar.component(.month, from: selectedDate)
+        let selectedDateDay = calendar.component(.day, from: selectedDate)
+        let selectedDateHour = calendar.component(.hour, from: selectedDate)
+        let selectedDateMin = calendar.component(.minute, from: selectedDate)
+        let selectedDateSecond = calendar.component(.second, from: selectedDate)
+        
+        // input the components into a DateComponent object
+        var dateComponents = DateComponents()
+        dateComponents.year = selectedDateYear
+        dateComponents.month = selectedDateMonth
+        dateComponents.day = selectedDateDay
+        dateComponents.hour = selectedDateHour
+        dateComponents.minute = selectedDateMin
+        dateComponents.second = selectedDateSecond
+        dateComponents.timeZone = .current
+        
+        let trigger = UNCalendarNotificationTrigger.init(dateMatching: dateComponents, repeats: false)
+        let request = UNNotificationRequest.init(identifier: "test identifier", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let _ = error {
+                print("Error: unable to create request")
+            } else {
+                print("Success: request created successfully")
+            }
+        }
+        
         // create a starting dictionary with the new element having count 0
         let todoDict: NSMutableDictionary = [
             key: [
-                "name": todo,
+                "name": alarmName,
 //                "order": 0,
+                "enabled": true,
                 "timestamp": self.formattedTimestamp
             ]
         ]
@@ -75,6 +121,7 @@ class AddAlarmViewController: UIViewController {
             let newDict: [String: Any] = [
                 "name": todo.alarmName!,
 //                "order": count,
+                "enabled": true,
                 "timestamp": todo.timestamp!
             ]
             
