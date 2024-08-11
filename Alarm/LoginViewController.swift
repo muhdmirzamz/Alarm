@@ -7,6 +7,8 @@
 
 import UIKit
 
+import UserNotifications
+
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
@@ -18,6 +20,14 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if granted {
+                print("Permission granted")
+            } else {
+                print("Permission granted")
+            }
+        }
     }
     
     @IBAction func login() {
