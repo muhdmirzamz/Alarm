@@ -12,5 +12,7 @@ class Alarm {
     
     var alarmName: String?
 //    var count: Int?
+    var enabled: Bool?
+    
     var timestamp: String?
 }
