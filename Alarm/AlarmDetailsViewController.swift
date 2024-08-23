@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AlarmDetailViewController: UIViewController {
+class AlarmDetailsViewController: UIViewController {
 
     var alarm: Alarm!
     
@@ -19,7 +19,14 @@ class AlarmDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.alarmName.text = alarm.alarmName
-        self.alarmTimestamp.text = alarm.timestamp
+        
+        let utilities = Utilities()
+        
+        guard let timestamp = alarm.timestamp else {
+            return
+        }
+        
+        self.alarmTimestamp.text = utilities.getUserReadableStringFromDate(dateString: timestamp)
     }
     
 

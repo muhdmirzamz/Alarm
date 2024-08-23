@@ -135,6 +135,15 @@ class AlarmListTableViewController: UITableViewController {
             let addAlarmVC = segue.destination as? AddAlarmViewController
             addAlarmVC?.alarmArr = self.alarmArr
         }
+        
+        if segue.identifier == "segueToViewAlarmDetails" {
+            guard let indexPathForAlarm = self.tableView.indexPathForSelectedRow else {
+                return
+            }
+            
+            let alarmDetailsVC = segue.destination as? AlarmDetailsViewController
+            alarmDetailsVC?.alarm = self.alarmArr[indexPathForAlarm.row]
+        }
     }
 
 }

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+23 Aug 2024
+- New function for converting time to user-readable format
+- Alarm Details View now shows the time of the alarm in a user-readable format
+
+22 Aug 2024
+- Added a new Alarms Detail View
+
 11 Aug 2024
 - Alarm notifications can now fire successfully
 - Introduced a new Alarm variable called ```enabled```
