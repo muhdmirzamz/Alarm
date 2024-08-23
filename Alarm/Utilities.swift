@@ -25,4 +25,16 @@ class Utilities {
         
         return dateFormatter.date(from: dateString)!
     }
+    
+    func getUserReadableStringFromDate(dateString: String) -> String {
+
+        let dateObject = self.getDateFromDateString(dateString: dateString)
+
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.dateFormat = "yyyy/MM/dd, HH:mm:ss"
+        
+        return dateFormatter.string(from: dateObject)
+    }
 }
