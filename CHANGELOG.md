@@ -1,5 +1,9 @@
 # CHANGELOG
 
+11 September 2024
+- Notifications now appear in-app as well 
+
+
 23 Aug 2024
 - New function for converting time to user-readable format
 - Alarm Details View now shows the time of the alarm in a user-readable format
