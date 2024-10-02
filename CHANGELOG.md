@@ -1,8 +1,10 @@
 # CHANGELOG
 
+2 October 2024
+- Applied autolayout to Login and Sign up screen
+
 11 September 2024
 - Notifications now appear in-app as well 
-
 
 23 Aug 2024
 - New function for converting time to user-readable format

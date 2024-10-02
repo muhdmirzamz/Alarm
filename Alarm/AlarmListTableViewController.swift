@@ -59,6 +59,15 @@ class AlarmListTableViewController: UITableViewController {
                     self.alarmArr.append(alarmObj)
                 }
                 
+                
+//                self.alarmArr.sort(by: {$0.timestamp > $1.timestamp})
+                self.alarmArr.sort(by: {
+                    if let timestamp1 = Double($0.timestamp!), let timestamp2 = Double($1.timestamp!) {
+                        return timestamp1 > timestamp2
+                    }
+                    return false
+                })
+                
                 self.tableView.reloadData()
             }
         }
@@ -147,3 +156,5 @@ class AlarmListTableViewController: UITableViewController {
     }
 
 }
+
+
