@@ -1,5 +1,8 @@
 # CHANGELOG
 
+3 October 2024
+- Alarms are now sorted by timestamp, oldest to newest 
+
 2 October 2024
 - Applied autolayout to Login and Sign up screen
 

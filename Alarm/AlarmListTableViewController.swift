@@ -34,11 +34,11 @@ class AlarmListTableViewController: UITableViewController {
             return
         }
         
-        ref.child("/alarms").child(userid).observeSingleEvent(of: .value) { snapshot in
-            if let alarmsDict = snapshot.value as? Dictionary<String, Any> {
+        ref.child("/alarms").child(userid).observeSingleEvent(of: .value) { snapshot  in
+            if let alarmsDict = snapshot.value as? NSDictionary {
                 for i in alarmsDict {
                     
-                    guard let alarmDict = i.value as? Dictionary<String, Any> else {
+                    guard let alarmDict = i.value as? NSDictionary else {
                         return
                     }
                     
@@ -52,23 +52,39 @@ class AlarmListTableViewController: UITableViewController {
                     
                     let alarmObj = Alarm()
                     
-                    alarmObj.key = i.key
+                    alarmObj.key = i.key as? String
                     alarmObj.alarmName = alarmName
                     alarmObj.timestamp = alarmTimestamp
                     
                     self.alarmArr.append(alarmObj)
                 }
                 
+                let utilities = Utilities()
                 
-//                self.alarmArr.sort(by: {$0.timestamp > $1.timestamp})
-                self.alarmArr.sort(by: {
-                    if let timestamp1 = Double($0.timestamp!), let timestamp2 = Double($1.timestamp!) {
-                        return timestamp1 > timestamp2
+                // we are sorting using the timestamp variable
+                // but we need to convert it to a Date type
+                self.alarmArr.sort(by: { alarm1, alarm2 in
+                    
+                    // timestamp is an optional
+                    guard let alarm1Timestamp = alarm1.timestamp else {
+                        return false
                     }
-                    return false
+                    
+                    // the date function returns a Date object, not an optional
+                    let date1 = utilities.getDateFromDateString(dateString: alarm1Timestamp)
+                    
+                    guard let alarm2Timestamp = alarm2.timestamp else {
+                        return false
+                    }
+                    
+                    let date2 = utilities.getDateFromDateString(dateString: alarm2Timestamp)
+                    
+                    return date1 < date2
                 })
                 
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
