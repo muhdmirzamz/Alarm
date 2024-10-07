@@ -1,5 +1,9 @@
 # CHANGELOG
 
+7 October 2024
+- You can now delete an alarm from the ```DetailView```
+- Fixed: If an alarm has been deleted and it is the only alarm left in the database, the list of alarms now reflect that correctly
+
 3 October 2024
 - Alarms are now sorted by timestamp, oldest to newest 
 

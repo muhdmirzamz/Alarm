@@ -213,11 +213,36 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nje-UO-4rY">
+                                <rect key="frame" x="0.0" y="768" width="393" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="84" id="2iJ-fB-O8G"/>
+                                    <constraint firstAttribute="width" secondItem="nje-UO-4rY" secondAttribute="height" multiplier="131:28" id="3OC-LR-E3Y"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Delete alarm">
+                                    <color key="baseForegroundColor" systemColor="systemRedColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="deleteAlarm" destination="Ieh-cI-FUt" eventType="touchUpInside" id="7t4-sM-ubv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XF2-tS-BOQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nje-UO-4rY" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" id="39Z-Vy-WpB"/>
+                            <constraint firstAttribute="bottom" secondItem="nje-UO-4rY" secondAttribute="bottom" id="8RJ-yT-owG"/>
+                            <constraint firstItem="nje-UO-4rY" firstAttribute="trailing" secondItem="XF2-tS-BOQ" secondAttribute="trailing" id="BmH-xm-nrZ"/>
+                            <constraint firstItem="nje-UO-4rY" firstAttribute="trailing" secondItem="XF2-tS-BOQ" secondAttribute="trailing" id="HMA-g6-avP"/>
+                            <constraint firstItem="nje-UO-4rY" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" id="Jux-yb-0ka"/>
+                            <constraint firstAttribute="bottom" secondItem="nje-UO-4rY" secondAttribute="bottom" id="O5Q-Bj-to8"/>
+                            <constraint firstItem="nje-UO-4rY" firstAttribute="centerX" secondItem="Hal-eH-yPu" secondAttribute="centerX" id="zRS-NL-RJa"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="DzP-zB-5zH"/>
+                    <navigationItem key="navigationItem" id="DzP-zB-5zH">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Aow-ZF-Be8"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="alarmName" destination="gfk-NV-wnn" id="RYe-va-TkZ"/>
                         <outlet property="alarmTimestamp" destination="YSG-46-led" id="YF2-qr-ie6"/>
@@ -299,6 +324,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

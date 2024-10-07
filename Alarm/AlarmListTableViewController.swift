@@ -10,9 +10,11 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
+import UserNotifications
+
 class AlarmListTableViewController: UITableViewController {
 
-    var alarmArr: [Alarm] = []
+    var alarmsArr: [Alarm] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +27,13 @@ class AlarmListTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        print("VIEW WILL APPEAR")
         
-        self.alarmArr.removeAll()
+        self.alarmsArr.removeAll()
         
+        print("removing all in alarm arr")
+        
+        print("fetching data...")
         let ref = Database.database().reference()
         
         guard let userid = Auth.auth().currentUser?.uid else {
@@ -56,14 +62,18 @@ class AlarmListTableViewController: UITableViewController {
                     alarmObj.alarmName = alarmName
                     alarmObj.timestamp = alarmTimestamp
                     
-                    self.alarmArr.append(alarmObj)
+                    self.alarmsArr.append(alarmObj)
+                    
+                    print("adding data")
                 }
                 
                 let utilities = Utilities()
                 
+                
+                print("sorting data")
                 // we are sorting using the timestamp variable
                 // but we need to convert it to a Date type
-                self.alarmArr.sort(by: { alarm1, alarm2 in
+                self.alarmsArr.sort(by: { alarm1, alarm2 in
                     
                     // timestamp is an optional
                     guard let alarm1Timestamp = alarm1.timestamp else {
@@ -85,6 +95,16 @@ class AlarmListTableViewController: UITableViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+            } else {
+                print("there is no data")
+                
+                // there is no data
+                
+                // we have already removed all data in alarms array
+                // so we should remember to reload data here
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -98,7 +118,7 @@ class AlarmListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.alarmArr.count
+        return self.alarmsArr.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,7 +126,7 @@ class AlarmListTableViewController: UITableViewController {
 
         // Configure the cell...
         var cellConfig = cell.defaultContentConfiguration()
-        cellConfig.text = self.alarmArr[indexPath.row].alarmName
+        cellConfig.text = self.alarmsArr[indexPath.row].alarmName
         
         cell.contentConfiguration = cellConfig
 
@@ -148,7 +168,6 @@ class AlarmListTableViewController: UITableViewController {
         return true
     }
     */
-
     
     // MARK: - Navigation
 
@@ -158,7 +177,7 @@ class AlarmListTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "segueToAddAlarm" {
             let addAlarmVC = segue.destination as? AddAlarmViewController
-            addAlarmVC?.alarmArr = self.alarmArr
+            addAlarmVC?.alarmsArr = self.alarmsArr
         }
         
         if segue.identifier == "segueToViewAlarmDetails" {
@@ -167,7 +186,7 @@ class AlarmListTableViewController: UITableViewController {
             }
             
             let alarmDetailsVC = segue.destination as? AlarmDetailsViewController
-            alarmDetailsVC?.alarm = self.alarmArr[indexPathForAlarm.row]
+            alarmDetailsVC?.alarm = self.alarmsArr[indexPathForAlarm.row]
         }
     }
 

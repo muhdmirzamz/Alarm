@@ -8,6 +8,7 @@
 import Foundation
 
 class Alarm {
+    // we will be using the key from firebase as the alarm identifier
     var key: String?
     
     var alarmName: String?
