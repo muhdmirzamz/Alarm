@@ -17,7 +17,7 @@ class AddAlarmViewController: UIViewController {
     @IBOutlet var textfield: UITextField!
     @IBOutlet var datePicker: UIDatePicker!
     
-    var alarmArr: [Alarm] = []
+    var alarmsArr: [Alarm] = []
     
     var formattedTimestamp = ""
 
@@ -93,7 +93,9 @@ class AddAlarmViewController: UIViewController {
         dateComponents.timeZone = .current
         
         let trigger = UNCalendarNotificationTrigger.init(dateMatching: dateComponents, repeats: false)
-        let request = UNNotificationRequest.init(identifier: "test identifier", content: content, trigger: trigger)
+        
+        // we will be using the key from firebase as the alarm identifier
+        let request = UNNotificationRequest.init(identifier: key, content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request) { error in
             if let _ = error {
@@ -103,10 +105,18 @@ class AddAlarmViewController: UIViewController {
             }
         }
         
+        // what the code below does is to simply create a new dictionary
+        // loop through the current array
+        // add every item to the new dictionary
+        // we are doing this because firebase accepts NSDictionaries
+        
+        // *we will not be using count for now
+        
         // create a starting dictionary with the new element having count 0
         let todoDict: NSMutableDictionary = [
             key: [
                 "name": alarmName,
+                "key": key,
 //                "order": 0,
                 "enabled": true,
                 "timestamp": self.formattedTimestamp
@@ -117,9 +127,10 @@ class AddAlarmViewController: UIViewController {
 //        var count = 1
         
         // loop through the existing array
-        for todo in self.alarmArr {
+        for todo in self.alarmsArr {
             let newDict: [String: Any] = [
                 "name": todo.alarmName!,
+                "key": key,
 //                "order": count,
                 "enabled": true,
                 "timestamp": todo.timestamp!
@@ -127,6 +138,7 @@ class AddAlarmViewController: UIViewController {
             
 //            count += 1
             
+            // add new element to the dictionary
             todoDict.setValue(newDict, forKey: todo.key!)
         }
         
