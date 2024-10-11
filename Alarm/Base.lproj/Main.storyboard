@@ -166,12 +166,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="PzI-5a-xCc">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="8fN-mn-8Eu">
+                            <connections>
+                                <action selector="editTable" destination="F1P-qq-NXt" id="1Pa-il-SvP"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="kLt-aD-doa">
                             <connections>
                                 <segue destination="a0L-KI-i9N" kind="show" identifier="segueToAddAlarm" id="HTP-cS-TFQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="kLt-aD-doa" id="SZG-9F-um2"/>
+                        <outlet property="editButton" destination="8fN-mn-8Eu" id="bcQ-m1-R4Q"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yeL-RB-PEz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

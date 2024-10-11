@@ -1,5 +1,8 @@
 # CHANGELOG
 
+11 October 2024
+- Implemented Edit button
+
 7 October 2024
 - You can now delete an alarm from the ```DetailView```
 - Fixed: If an alarm has been deleted and it is the only alarm left in the database, the list of alarms now reflect that correctly

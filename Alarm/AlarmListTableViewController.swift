@@ -14,6 +14,9 @@ import UserNotifications
 
 class AlarmListTableViewController: UITableViewController {
 
+    @IBOutlet var editButton: UIBarButtonItem!
+    @IBOutlet var addButton: UIBarButtonItem!
+    
     var alarmsArr: [Alarm] = []
     
     override func viewDidLoad() {
@@ -168,6 +171,41 @@ class AlarmListTableViewController: UITableViewController {
         return true
     }
     */
+    
+    @IBAction func editTable() {
+        // if table view is not in edit mode
+        if self.tableView.isEditing == false {
+            
+            // turn it into edit mode
+            self.tableView.isEditing = true
+            
+            /*
+                table view should be in edit mode here
+                UI elements should reflect a table view in edit mode
+             */
+            
+            // in idle mode, the edit button should display "Done" to signify to users to exit edit mode
+            self.editButton.title = "Done"
+            
+            // we want to disable adding alarms in edit mode
+            self.addButton.isEnabled = false
+        } else {
+            // if table view is in edit mode
+            
+            // exit edit mode
+            self.tableView.isEditing = false
+            
+            /*
+                table view should not be in edit mode here
+             */
+            
+            // the edit button should display "Edit" to signify to users that they can start editing if they tap on this button
+            self.editButton.title = "Edit"
+            
+            // we want to enable adding alarms when not in edit mode
+            self.addButton.isEnabled = true
+        }
+    }
     
     // MARK: - Navigation
 
