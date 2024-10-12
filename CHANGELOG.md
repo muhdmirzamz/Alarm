@@ -1,5 +1,8 @@
 # CHANGELOG
 
+12 October 2024
+- Implemented edit button functionality
+
 11 October 2024
 - Implemented Edit button
 

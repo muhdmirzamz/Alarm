@@ -145,17 +145,58 @@ class AlarmListTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            // delete from firebase
+            let ref = Database.database().reference()
+            
+            guard let userId = Auth.auth().currentUser?.uid else {
+                return
+            }
+            
+            let alarm = self.alarmsArr[indexPath.row]
+            
+            guard let alarmId = alarm.key else {
+                return
+            }
+            
+            ref.child("/alarms/\(userId)/\(alarmId)").removeValue { error, ref in
+                if error == nil {
+                    
+                    // delete from pending notifications
+                    UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+                        for request in requests {
+                            
+                            // delete alarm in pending notifications (if it is enabled)
+                            if request.identifier == alarmId {
+                                if alarm.enabled == true {
+                                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarmId])
+                                }
+                                
+                                // if alarm is not enabled or disabled, it is not in the pending notification requests
+                                // hence there is no need to remove anything
+                            }
+                        }
+
+                        // delete from local array
+                        self.alarmsArr.remove(at: indexPath.row)
+                        
+                        DispatchQueue.main.async {
+                            // Delete the row from the data source
+                            tableView.deleteRows(at: [indexPath], with: .fade)
+                        }
+                    }
+                }
+            }
+                        
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
