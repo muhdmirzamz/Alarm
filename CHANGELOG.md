@@ -1,5 +1,8 @@
 # CHANGELOG
 
+13 October 2024
+- Fixed: Deleted alarms dont fire anymore
+
 12 October 2024
 - Implemented edit button functionality
 
