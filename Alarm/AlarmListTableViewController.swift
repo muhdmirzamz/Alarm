@@ -55,6 +55,10 @@ class AlarmListTableViewController: UITableViewController {
                         return
                     }
                     
+                    guard let alarmIsEnabled = alarmDict["enabled"] as? Bool else {
+                        return
+                    }
+                    
                     guard let alarmTimestamp = alarmDict["timestamp"] as? String else {
                         return
                     }
@@ -63,6 +67,7 @@ class AlarmListTableViewController: UITableViewController {
                     
                     alarmObj.key = i.key as? String
                     alarmObj.alarmName = alarmName
+                    alarmObj.enabled = alarmIsEnabled
                     alarmObj.timestamp = alarmTimestamp
                     
                     self.alarmsArr.append(alarmObj)
@@ -74,6 +79,7 @@ class AlarmListTableViewController: UITableViewController {
                 
                 
                 print("sorting data")
+                
                 // we are sorting using the timestamp variable
                 // but we need to convert it to a Date type
                 self.alarmsArr.sort(by: { alarm1, alarm2 in
@@ -163,8 +169,12 @@ class AlarmListTableViewController: UITableViewController {
                 return
             }
             
+            print("alarm id to be deleted: \(alarmId)")
+            
             ref.child("/alarms/\(userId)/\(alarmId)").removeValue { error, ref in
                 if error == nil {
+                    
+                    print("accessing pending notifications")
                     
                     // delete from pending notifications
                     UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
@@ -172,8 +182,13 @@ class AlarmListTableViewController: UITableViewController {
                             
                             // delete alarm in pending notifications (if it is enabled)
                             if request.identifier == alarmId {
+                                
+                                print("found alarm id")
+                                
                                 if alarm.enabled == true {
+                                    print("deleting alarm from pending notifications")
                                     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarmId])
+                                    break
                                 }
                                 
                                 // if alarm is not enabled or disabled, it is not in the pending notification requests
