@@ -1,5 +1,9 @@
 # CHANGELOG
 
+14 October 2024
+- Alarm name now shows in a textfield in Detail View
+- Alarm time now shows in a date picker in Detail View
+
 13 October 2024
 - Fixed: Deleted alarms dont fire anymore
 

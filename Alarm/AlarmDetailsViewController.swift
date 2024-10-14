@@ -14,22 +14,24 @@ class AlarmDetailsViewController: UIViewController {
 
     var alarm: Alarm!
     
-    @IBOutlet var alarmName: UILabel!
-    @IBOutlet var alarmTimestamp: UILabel!
+    @IBOutlet var alarmNameTextfield: UITextField!
+    @IBOutlet var datePicker: UIDatePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.alarmName.text = self.alarm.alarmName
+        self.alarmNameTextfield.placeholder = self.alarm.alarmName
         
         let utilities = Utilities()
         
         guard let timestamp = alarm.timestamp else {
             return
         }
+                
+        let convertedDate = utilities.getDateFromDateString(dateString: timestamp)
         
-        self.alarmTimestamp.text = utilities.getUserReadableStringFromDate(dateString: timestamp)
+        self.datePicker.date = convertedDate
     }
     
 

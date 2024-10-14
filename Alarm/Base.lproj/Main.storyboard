@@ -194,30 +194,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alarm name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fp2-Jr-YmR">
-                                <rect key="frame" x="31" y="180" width="91" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fp2-Jr-YmR">
+                                <rect key="frame" x="31" y="180" width="114" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="Rjk-kI-w0f"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alarm time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0m-23-SfT">
-                                <rect key="frame" x="31" y="231" width="82" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfk-NV-wnn">
-                                <rect key="frame" x="175" y="180" width="187" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSG-46-led">
-                                <rect key="frame" x="175" y="231" width="187" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0m-23-SfT">
+                                <rect key="frame" x="31" y="307" width="114" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="BU1-t5-7T4"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -236,16 +226,36 @@
                                     <action selector="deleteAlarm" destination="Ieh-cI-FUt" eventType="touchUpInside" id="7t4-sM-ubv"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XXN-oN-tJn">
+                                <rect key="frame" x="64" y="408" width="266" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="266" id="IBa-v4-Aeg"/>
+                                </constraints>
+                            </datePicker>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="che-qv-drH">
+                                <rect key="frame" x="31" y="220" width="332" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XF2-tS-BOQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="che-qv-drH" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="0o8-WJ-BBb"/>
+                            <constraint firstItem="nje-UO-4rY" firstAttribute="top" secondItem="XXN-oN-tJn" secondAttribute="bottom" constant="324" id="1X2-cQ-xNJ"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" id="39Z-Vy-WpB"/>
                             <constraint firstAttribute="bottom" secondItem="nje-UO-4rY" secondAttribute="bottom" id="8RJ-yT-owG"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="trailing" secondItem="XF2-tS-BOQ" secondAttribute="trailing" id="BmH-xm-nrZ"/>
+                            <constraint firstItem="K0m-23-SfT" firstAttribute="top" secondItem="che-qv-drH" secondAttribute="bottom" constant="53" id="DbX-9G-Yt5"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="trailing" secondItem="XF2-tS-BOQ" secondAttribute="trailing" id="HMA-g6-avP"/>
+                            <constraint firstItem="XF2-tS-BOQ" firstAttribute="trailing" secondItem="che-qv-drH" secondAttribute="trailing" constant="30" id="IRB-K9-ofv"/>
+                            <constraint firstItem="che-qv-drH" firstAttribute="top" secondItem="fp2-Jr-YmR" secondAttribute="bottom" constant="19" id="JQA-Jx-fpE"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" id="Jux-yb-0ka"/>
+                            <constraint firstItem="fp2-Jr-YmR" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="LlI-tx-cvG"/>
                             <constraint firstAttribute="bottom" secondItem="nje-UO-4rY" secondAttribute="bottom" id="O5Q-Bj-to8"/>
+                            <constraint firstItem="fp2-Jr-YmR" firstAttribute="top" secondItem="XF2-tS-BOQ" secondAttribute="top" constant="77" id="bwN-Is-jcr"/>
+                            <constraint firstItem="XXN-oN-tJn" firstAttribute="centerX" secondItem="Hal-eH-yPu" secondAttribute="centerX" id="ix5-SX-ug5"/>
+                            <constraint firstItem="K0m-23-SfT" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="vTt-Iz-dVN"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="centerX" secondItem="Hal-eH-yPu" secondAttribute="centerX" id="zRS-NL-RJa"/>
                         </constraints>
                     </view>
@@ -253,8 +263,8 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Aow-ZF-Be8"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="alarmName" destination="gfk-NV-wnn" id="RYe-va-TkZ"/>
-                        <outlet property="alarmTimestamp" destination="YSG-46-led" id="YF2-qr-ie6"/>
+                        <outlet property="alarmNameTextfield" destination="che-qv-drH" id="gAY-1e-iMX"/>
+                        <outlet property="datePicker" destination="XXN-oN-tJn" id="R2m-YE-NZq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="asI-qC-ttJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -270,38 +280,59 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Suj-hy-7gO">
-                                <rect key="frame" x="93" y="220" width="206" height="34"/>
+                                <rect key="frame" x="31" y="220" width="332" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lvs-Dq-5RN">
-                                <rect key="frame" x="169" y="330" width="55" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add"/>
-                                <connections>
-                                    <action selector="addAlarm" destination="a0L-KI-i9N" eventType="touchUpInside" id="oUT-uj-bvO"/>
-                                </connections>
-                            </button>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zD0-MZ-9p6">
-                                <rect key="frame" x="29" y="408" width="224" height="36"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zD0-MZ-9p6">
+                                <rect key="frame" x="63.666666666666657" y="408" width="266" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="266" id="KmM-si-dI8"/>
+                                </constraints>
                                 <connections>
                                     <action selector="pickerValueChangedWithSender:forEvent:" destination="a0L-KI-i9N" eventType="valueChanged" id="YV9-xs-AvO"/>
                                 </connections>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N49-fm-hew">
+                                <rect key="frame" x="31" y="180" width="114" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="aYh-bl-rXQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YO5-3h-uyq">
+                                <rect key="frame" x="31" y="307" width="114" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="xOo-Nb-xyu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kNE-kQ-kuF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="kNE-kQ-kuF" firstAttribute="trailing" secondItem="lvs-Dq-5RN" secondAttribute="trailing" constant="169" id="F1x-yI-fGu"/>
-                            <constraint firstItem="kNE-kQ-kuF" firstAttribute="trailing" secondItem="Suj-hy-7gO" secondAttribute="trailing" constant="94" id="JDb-Io-YSu"/>
-                            <constraint firstItem="lvs-Dq-5RN" firstAttribute="leading" secondItem="kNE-kQ-kuF" secondAttribute="leading" constant="169" id="Ut8-KF-M5u"/>
-                            <constraint firstItem="Suj-hy-7gO" firstAttribute="leading" secondItem="kNE-kQ-kuF" secondAttribute="leading" constant="93" id="WjL-6d-XMn"/>
-                            <constraint firstItem="lvs-Dq-5RN" firstAttribute="top" secondItem="Suj-hy-7gO" secondAttribute="bottom" constant="76" id="jos-G5-BTX"/>
-                            <constraint firstItem="Suj-hy-7gO" firstAttribute="top" secondItem="kNE-kQ-kuF" secondAttribute="top" constant="117" id="qTY-gh-FHJ"/>
+                            <constraint firstItem="kNE-kQ-kuF" firstAttribute="trailing" secondItem="Suj-hy-7gO" secondAttribute="trailing" constant="30" id="2sF-4L-PG1"/>
+                            <constraint firstItem="N49-fm-hew" firstAttribute="top" secondItem="kNE-kQ-kuF" secondAttribute="top" constant="77" id="FCW-2Y-2mx"/>
+                            <constraint firstItem="zD0-MZ-9p6" firstAttribute="centerX" secondItem="44B-04-im1" secondAttribute="centerX" id="aun-KU-049"/>
+                            <constraint firstItem="YO5-3h-uyq" firstAttribute="leading" secondItem="kNE-kQ-kuF" secondAttribute="leading" constant="31" id="bnx-hy-Pul"/>
+                            <constraint firstItem="kNE-kQ-kuF" firstAttribute="bottom" secondItem="zD0-MZ-9p6" secondAttribute="bottom" constant="374" id="he0-PB-21w"/>
+                            <constraint firstItem="Suj-hy-7gO" firstAttribute="leading" secondItem="kNE-kQ-kuF" secondAttribute="leading" constant="31" id="s5X-HC-AKL"/>
+                            <constraint firstItem="Suj-hy-7gO" firstAttribute="top" secondItem="N49-fm-hew" secondAttribute="bottom" constant="19" id="tX1-Ns-96s"/>
+                            <constraint firstItem="YO5-3h-uyq" firstAttribute="top" secondItem="Suj-hy-7gO" secondAttribute="bottom" constant="53" id="tZL-Af-9SG"/>
+                            <constraint firstItem="N49-fm-hew" firstAttribute="leading" secondItem="kNE-kQ-kuF" secondAttribute="leading" constant="31" id="wcU-3U-aKg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cVD-rH-JY0"/>
+                    <navigationItem key="navigationItem" id="cVD-rH-JY0">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="VuE-Ep-uyd">
+                            <connections>
+                                <action selector="addAlarm" destination="a0L-KI-i9N" id="ltj-z0-oF3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="datePicker" destination="zD0-MZ-9p6" id="cLv-xf-c7E"/>
                         <outlet property="textfield" destination="Suj-hy-7gO" id="hEg-Zd-OP5"/>
@@ -309,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DWY-fQ-N7R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3874" y="-711"/>
+            <point key="canvasLocation" x="3872.5190839694656" y="-711.26760563380287"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="27y-Fi-at8">
