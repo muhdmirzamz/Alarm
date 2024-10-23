@@ -227,10 +227,13 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XXN-oN-tJn">
-                                <rect key="frame" x="64" y="408" width="266" height="36"/>
+                                <rect key="frame" x="63.666666666666657" y="408" width="266" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="266" id="IBa-v4-Aeg"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="pickerValueChangedWithSender:forEvent:" destination="Ieh-cI-FUt" eventType="valueChanged" id="9GX-YV-yes"/>
+                                </connections>
                             </datePicker>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="che-qv-drH">
                                 <rect key="frame" x="31" y="220" width="332" height="34"/>
@@ -260,7 +263,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DzP-zB-5zH">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Aow-ZF-Be8"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Aow-ZF-Be8">
+                            <connections>
+                                <action selector="saveAlarm" destination="Ieh-cI-FUt" id="NHi-eF-Q6B"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="alarmNameTextfield" destination="che-qv-drH" id="gAY-1e-iMX"/>

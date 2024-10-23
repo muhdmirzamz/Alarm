@@ -1,5 +1,8 @@
 # CHANGELOG
 
+23 October 2024
+- You can now edit alarms
+
 14 October 2024
 - Alarm name now shows in a textfield in Detail View
 - Alarm time now shows in a date picker in Detail View

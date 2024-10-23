@@ -60,6 +60,18 @@ class AddAlarmViewController: UIViewController {
             return
         }
         
+        /*
+            a request contains:
+            - content
+            - trigger (requires a dateComponent)
+         
+            extract the components from the date input
+            put it inside a DateComponents object
+         
+            create a request
+            add request to UNUserNotificationCenter
+        */
+        
         // create notification content
         let content = UNMutableNotificationContent()
         content.title = alarmName

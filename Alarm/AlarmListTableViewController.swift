@@ -30,7 +30,7 @@ class AlarmListTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        print("VIEW WILL APPEAR")
+        print("[viewWillAppear] =========")
         
         self.alarmsArr.removeAll()
         
@@ -281,6 +281,7 @@ class AlarmListTableViewController: UITableViewController {
             
             let alarmDetailsVC = segue.destination as? AlarmDetailsViewController
             alarmDetailsVC?.alarm = self.alarmsArr[indexPathForAlarm.row]
+            alarmDetailsVC?.alarmsArr = self.alarmsArr
         }
     }
 
