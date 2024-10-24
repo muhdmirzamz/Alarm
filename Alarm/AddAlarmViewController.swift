@@ -142,7 +142,7 @@ class AddAlarmViewController: UIViewController {
         for todo in self.alarmsArr {
             let newDict: [String: Any] = [
                 "name": todo.alarmName!,
-                "key": key,
+                "key": todo.key!,
 //                "order": count,
                 "enabled": true,
                 "timestamp": todo.timestamp!
