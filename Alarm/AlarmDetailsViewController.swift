@@ -118,6 +118,8 @@ class AlarmDetailsViewController: UIViewController {
         let alarmDate = utilities.getDateFromDateString(dateString: timestamp)
         
         if self.inputDate != alarmDate {
+            print("timestamp is different. setting new timestamp")
+            
             dateIsDiff = true
         }
 
@@ -162,6 +164,7 @@ class AlarmDetailsViewController: UIViewController {
                                     print("deleting alarm from pending notifications")
                                     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarmId])
                                     
+                                    print("removing from local array")
                                     // remove from local array
                                     self.alarmsArr.removeAll(where: { alarm in
                                         // remove all keys which are equivalent to alarm id
@@ -182,6 +185,8 @@ class AlarmDetailsViewController: UIViewController {
                         // create alarm
                         var alarmName = ""
                         
+                        print("checking alarm name")
+                        // we are using dispatch queue here because we are accessing a UI element
                         DispatchQueue.main.async {
                             // create alarm
                             if self.alarmNameTextfield.text == "" {
@@ -193,17 +198,25 @@ class AlarmDetailsViewController: UIViewController {
                         
                         
                                                 
-                        let alarmDate = utilities.getDateFromDateString(dateString: self.alarm.timestamp!)
+                        // set alarmDate to existing alarm date
+                        var alarmDate = utilities.getDateFromDateString(dateString: self.alarm.timestamp!)
                         
-                        // if the date is not the same, it means the user has input a new date
+                        print("checking alarm timestamp")
+                        
+                        // if the date input by user is not the same
                         if self.inputDate != alarmDate {
-                            self.inputDate = alarmDate
-                        } 
+                            print("timestamp is different. Setting new timestamp..")
+                            
+                            // set alarm date to new date
+                            alarmDate = self.inputDate
+                        }
                         
+                        print("generating key")
                         guard let key = ref.child("/alarms/\(userId)").childByAutoId().key else {
                             return
                         }
                         
+                        print("creating notif")
                         /* create notif request */
                         // create notification content
                         let content = UNMutableNotificationContent()
@@ -217,12 +230,14 @@ class AlarmDetailsViewController: UIViewController {
                         // you need the dateComponents for the notification trigger
                         // extract the components from that date object
                         let calendar = Calendar.current
-                        let selectedDateYear = calendar.component(.year, from: self.inputDate)
-                        let selectedDateMonth = calendar.component(.month, from: self.inputDate)
-                        let selectedDateDay = calendar.component(.day, from: self.inputDate)
-                        let selectedDateHour = calendar.component(.hour, from: self.inputDate)
-                        let selectedDateMin = calendar.component(.minute, from: self.inputDate)
-                        let selectedDateSecond = calendar.component(.second, from: self.inputDate)
+                        let selectedDateYear = calendar.component(.year, from: alarmDate)
+                        let selectedDateMonth = calendar.component(.month, from: alarmDate)
+                        let selectedDateDay = calendar.component(.day, from: alarmDate)
+                        let selectedDateHour = calendar.component(.hour, from: alarmDate)
+                        print("timestamp hour /\(selectedDateHour)")
+                        let selectedDateMin = calendar.component(.minute, from: alarmDate)
+                        print("timestamp min /\(selectedDateMin)")
+                        let selectedDateSecond = calendar.component(.second, from: alarmDate)
                         
                         // input the components into a DateComponent object
                         var dateComponents = DateComponents()
@@ -239,62 +254,67 @@ class AlarmDetailsViewController: UIViewController {
                         // we will be using the key from firebase as the alarm identifier
                         let request = UNNotificationRequest.init(identifier: key, content: content, trigger: trigger)
                         
+                        print("adding notif")
+                        
                         UNUserNotificationCenter.current().add(request) { error in
                             if let _ = error {
                                 print("Error: unable to create request")
                             } else {
                                 print("Success: request created successfully")
-                            }
-                        }
-                        
-                        let formattedTimestamp = utilities.getStringForDate(date: self.inputDate)
-                        
-                        // what the code below does is to simply create a new dictionary
-                        // loop through the current array
-                        // add every item to the new dictionary
-                        // we are doing this because firebase accepts NSDictionaries
-                        
-                        // *we will not be using count for now
-                        
-                        // create a starting dictionary with the new element having count 0
-                        let todoDict: NSMutableDictionary = [
-                            key: [
-                                "name": alarmName,
-                                "key": key,
-                //                "order": 0,
-                                "enabled": true,
-                                "timestamp": formattedTimestamp
-                            ]
-                        ]
-                        
-                        // start the next element with count 1
-                //        var count = 1
-                        
-                        // loop through the existing array
-                        for todo in self.alarmsArr {
-                            let newDict: [String: Any] = [
-                                "name": todo.alarmName!,
-                                "key": key,
-                //                "order": count,
-                                "enabled": true,
-                                "timestamp": todo.timestamp!
-                            ]
-                            
-                //            count += 1
-                            
-                            // add new element to the dictionary
-                            todoDict.setValue(newDict, forKey: todo.key!)
-                        }
-                        
-                        ref.child("/alarms/\(userId)").setValue(todoDict)
+                                
+                                let formattedTimestamp = utilities.getStringForDate(date: alarmDate)
+                                
+                                print("creating dictionary")
+                                
+                                // what the code below does is to simply create a new dictionary
+                                // loop through the current array
+                                // add every item to the new dictionary
+                                // we are doing this because firebase accepts NSDictionaries
+                                
+                                // *we will not be using count for now
+                                
+                                // create a starting dictionary with the new element having count 0
+                                let todoDict: NSMutableDictionary = [
+                                    key: [
+                                        "name": alarmName,
+                                        "key": key,
+                        //                "order": 0,
+                                        "enabled": true,
+                                        "timestamp": formattedTimestamp
+                                    ]
+                                ]
+                                
+                                // start the next element with count 1
+                        //        var count = 1
+                                
+                                // loop through the existing array
+                                for todo in self.alarmsArr {
+                                    let newDict: [String: Any] = [
+                                        "name": todo.alarmName!,
+                                        "key": todo.key!,
+                        //                "order": count,
+                                        "enabled": true,
+                                        "timestamp": todo.timestamp!
+                                    ]
+                                    
+                        //            count += 1
+                                    
+                                    // add new element to the dictionary
+                                    todoDict.setValue(newDict, forKey: todo.key!)
+                                }
+                                
+                                print("pushing to database")
+                                
+                                ref.child("/alarms/\(userId)").setValue(todoDict)
 
-                        DispatchQueue.main.async {
-                            self.navigationController?.popViewController(animated: true)
+                                DispatchQueue.main.async {
+                                    self.navigationController?.popViewController(animated: true)
+                                }
+                            }
                         }
                     }
                 }
             }
         }
     }
-
 }

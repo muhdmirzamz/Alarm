@@ -1,5 +1,8 @@
 # CHANGELOG
 
+24 October 2024
+- Fixed: Editing an alarm's date now works as expected
+
 23 October 2024
 - You can now edit alarms
 
