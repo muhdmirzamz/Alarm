@@ -12,13 +12,14 @@ import UserNotifications
 import FirebaseAuth
 import FirebaseDatabase
 
-class AlarmDetailsViewController: UIViewController {
+class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
 
     var alarm: Alarm!
     
     // we need this array for sorting purposes when we send an "edited" alarm back to firebase
     var alarmsArr: [Alarm] = []
     
+    @IBOutlet var saveButton: UIBarButtonItem!
     @IBOutlet var alarmNameTextfield: UITextField!
     @IBOutlet var datePicker: UIDatePicker!
     
@@ -28,8 +29,11 @@ class AlarmDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.saveButton.isEnabled = false
+        
         // Do any additional setup after loading the view.
         self.alarmNameTextfield.placeholder = self.alarm.alarmName
+        self.alarmNameTextfield.addTarget(self, action: #selector(AlarmDetailsViewController.textFieldDidChange(textField:)), for: .editingChanged)
         
         let utilities = Utilities()
         
@@ -90,8 +94,39 @@ class AlarmDetailsViewController: UIViewController {
         }
     }
     
+    @objc func textFieldDidChange(textField: UITextField)  {
+        
+        print("\(self.alarmNameTextfield.text)")
+        
+        // make sure alarm text:
+        // - is not empty because an empty text and a filled text is different. the old alarm text is filled
+        // - is different from the old value
+        if self.alarmNameTextfield.text != "" && self.alarmNameTextfield.text != self.alarm.alarmName {
+            self.saveButton.isEnabled = true
+        } else {
+            self.saveButton.isEnabled = false
+        }
+    }
+    
     @IBAction func pickerValueChanged(sender: UIDatePicker, forEvent event: UIEvent) {
         self.inputDate = sender.date
+        
+        // we are comparing date objects here
+        let utilities = Utilities()
+        
+        guard let timestamp = self.alarm.timestamp else {
+            return
+        }
+        let alarmDate = utilities.getDateFromDateString(dateString: timestamp)
+        
+        // user changed date
+        if self.inputDate != alarmDate {
+            print("timestamp is different. setting new timestamp")
+            
+            self.saveButton.isEnabled = true
+        } else {
+            self.saveButton.isEnabled = false
+        }
     }
     
     @IBAction func saveAlarm() {

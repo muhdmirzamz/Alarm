@@ -272,6 +272,7 @@
                     <connections>
                         <outlet property="alarmNameTextfield" destination="che-qv-drH" id="gAY-1e-iMX"/>
                         <outlet property="datePicker" destination="XXN-oN-tJn" id="R2m-YE-NZq"/>
+                        <outlet property="saveButton" destination="Aow-ZF-Be8" id="WQ4-dd-vdp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="asI-qC-ttJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
