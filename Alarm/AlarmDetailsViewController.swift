@@ -77,7 +77,6 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
                         // delete alarm in pending notifications (if it is enabled)
                         if request.identifier == self.alarm.key! {
                             if self.alarm.enabled == true {
-                                print("deleting data")
                                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [self.alarm.key!])
                             }
                             
@@ -95,9 +94,6 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func textFieldDidChange(textField: UITextField)  {
-        
-        print("\(self.alarmNameTextfield.text)")
-        
         // make sure alarm text:
         // - is not empty because an empty text and a filled text is different. the old alarm text is filled
         // - is different from the old value
@@ -121,8 +117,6 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
         
         // user changed date
         if self.inputDate != alarmDate {
-            print("timestamp is different. setting new timestamp")
-            
             self.saveButton.isEnabled = true
         } else {
             self.saveButton.isEnabled = false
@@ -130,9 +124,6 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveAlarm() {
-        
-        print("[saving alarm] =========")
-        
         var alarmNameIsDiff = false
         var dateIsDiff = false
         
@@ -153,8 +144,6 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
         let alarmDate = utilities.getDateFromDateString(dateString: timestamp)
         
         if self.inputDate != alarmDate {
-            print("timestamp is different. setting new timestamp")
-            
             dateIsDiff = true
         }
 
@@ -171,35 +160,25 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             
-            print("alarm id to be deleted: \(alarmId)")
-            
             ref.child("/alarms/\(userId)/\(alarmId)").removeValue { error, argRef in
                 
                 // watch out for errors or edge case scenarios here
                 if error == nil {
-                    
-                    print("accessing pending notifications")
-                    
+
                     // delete from pending notifications
                     UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
                         
                         // watch out for errors or edge case scenarios here
                         for request in requests {
-                            
-                            print("searching for request")
-                            
+
                             // delete alarm in pending notifications (if it is enabled)
                             if request.identifier == alarmId {
-                                
-                                print("found alarm id")
-                                
+
                                 if self.alarm.enabled == true {
                                     
                                     // remove from pending notifs
-                                    print("deleting alarm from pending notifications")
                                     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarmId])
                                     
-                                    print("removing from local array")
                                     // remove from local array
                                     self.alarmsArr.removeAll(where: { alarm in
                                         // remove all keys which are equivalent to alarm id
@@ -214,13 +193,10 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         
-                        print("request search done")
-                        
-                        
+
                         // create alarm
                         var alarmName = ""
                         
-                        print("checking alarm name")
                         // we are using dispatch queue here because we are accessing a UI element
                         DispatchQueue.main.async {
                             // create alarm
@@ -236,22 +212,17 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
                         // set alarmDate to existing alarm date
                         var alarmDate = utilities.getDateFromDateString(dateString: self.alarm.timestamp!)
                         
-                        print("checking alarm timestamp")
-                        
                         // if the date input by user is not the same
                         if self.inputDate != alarmDate {
-                            print("timestamp is different. Setting new timestamp..")
-                            
+
                             // set alarm date to new date
                             alarmDate = self.inputDate
                         }
                         
-                        print("generating key")
                         guard let key = ref.child("/alarms/\(userId)").childByAutoId().key else {
                             return
                         }
                         
-                        print("creating notif")
                         /* create notif request */
                         // create notification content
                         let content = UNMutableNotificationContent()
@@ -269,9 +240,7 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
                         let selectedDateMonth = calendar.component(.month, from: alarmDate)
                         let selectedDateDay = calendar.component(.day, from: alarmDate)
                         let selectedDateHour = calendar.component(.hour, from: alarmDate)
-                        print("timestamp hour /\(selectedDateHour)")
                         let selectedDateMin = calendar.component(.minute, from: alarmDate)
-                        print("timestamp min /\(selectedDateMin)")
                         let selectedDateSecond = calendar.component(.second, from: alarmDate)
                         
                         // input the components into a DateComponent object
@@ -288,9 +257,7 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
                         
                         // we will be using the key from firebase as the alarm identifier
                         let request = UNNotificationRequest.init(identifier: key, content: content, trigger: trigger)
-                        
-                        print("adding notif")
-                        
+
                         UNUserNotificationCenter.current().add(request) { error in
                             if let _ = error {
                                 print("Error: unable to create request")
@@ -298,9 +265,7 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
                                 print("Success: request created successfully")
                                 
                                 let formattedTimestamp = utilities.getStringForDate(date: alarmDate)
-                                
-                                print("creating dictionary")
-                                
+
                                 // what the code below does is to simply create a new dictionary
                                 // loop through the current array
                                 // add every item to the new dictionary
@@ -337,9 +302,7 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
                                     // add new element to the dictionary
                                     todoDict.setValue(newDict, forKey: todo.key!)
                                 }
-                                
-                                print("pushing to database")
-                                
+
                                 ref.child("/alarms/\(userId)").setValue(todoDict)
 
                                 DispatchQueue.main.async {

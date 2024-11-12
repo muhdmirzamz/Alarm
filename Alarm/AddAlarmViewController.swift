@@ -29,9 +29,7 @@ class AddAlarmViewController: UIViewController {
         // set default date and time by getting the default date and time from the date picker
         let utilities = Utilities()
         self.formattedTimestamp = utilities.getStringForDate(date: self.datePicker.date)
-        
-        print("curr timestamp: \(self.formattedTimestamp)")
-        
+
     }
     
     @IBAction func pickerValueChanged(sender: UIDatePicker, forEvent event: UIEvent) {

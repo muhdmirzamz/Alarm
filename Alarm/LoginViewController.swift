@@ -47,7 +47,9 @@ class LoginViewController: UIViewController {
                 
                 navController.modalPresentationStyle = .fullScreen
                 
-                self.present(navController, animated: true)
+                DispatchQueue.main.async {
+                    self.present(navController, animated: true)
+                }
             }
         }
     }
