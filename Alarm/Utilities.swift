@@ -33,7 +33,19 @@ class Utilities {
         let dateFormatter = DateFormatter()
         
         dateFormatter.timeZone = TimeZone.autoupdatingCurrent
-        dateFormatter.dateFormat = "yyyy/MM/dd, HH:mm:ss"
+        dateFormatter.dateFormat = "dd/MM/yyyy, HH:mm:ss"
+        
+        return dateFormatter.string(from: dateObject)
+    }
+    
+    func getUserReadableStringForTableCellFromDate(dateString: String) -> String {
+
+        let dateObject = self.getDateFromDateString(dateString: dateString)
+
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.dateFormat = "dd/MM HH:mm"
         
         return dateFormatter.string(from: dateObject)
     }

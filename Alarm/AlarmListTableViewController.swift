@@ -131,13 +131,17 @@ class AlarmListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AlarmTableViewCell else {
+            print("Error on loading cell")
+            
+            return tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        }
 
-        // Configure the cell...
-        var cellConfig = cell.defaultContentConfiguration()
-        cellConfig.text = self.alarmsArr[indexPath.row].alarmName
+        let utilities = Utilities()
+        let dateString = utilities.getUserReadableStringForTableCellFromDate(dateString: self.alarmsArr[indexPath.row].timestamp!)
         
-        cell.contentConfiguration = cellConfig
+        cell.alarmTimeLabel.text = dateString
+        cell.alarmNameLabel.text = self.alarmsArr[indexPath.row].alarmName
 
         return cell
     }

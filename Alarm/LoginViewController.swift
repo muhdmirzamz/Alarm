@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
             if granted {
                 print("Permission granted")
             } else {
-                print("Permission granted")
+                print("Permission denied")
             }
         }
     }

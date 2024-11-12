@@ -1,5 +1,8 @@
 # CHANGELOG
 
+12 November 2024
+- Alarm cell redesign
+
 24 October 2024
 - Fixed: Editing an alarm's date now works as expected
 
