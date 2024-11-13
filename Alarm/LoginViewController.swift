@@ -50,6 +50,19 @@ class LoginViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.present(navController, animated: true)
                 }
+            } else {
+                let alertController = UIAlertController.init(title: "Error", message: "Username or password is incorrect", preferredStyle: .alert)
+                let okAction = UIAlertAction.init(title: "OK", style: .default) { action in
+                    DispatchQueue.main.async {
+                        self.emailTxtfield.text = ""
+                        self.passwordTxtfield.text = ""
+                    }
+                }
+                alertController.addAction(okAction)
+                
+                DispatchQueue.main.async {
+                    self.present(alertController, animated: true)
+                }
             }
         }
     }

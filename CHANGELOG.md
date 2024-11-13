@@ -1,5 +1,8 @@
 # CHANGELOG
 
+13 November 2024
+- Error message appears after wrong credentials on login
+
 12 November 2024
 - Alarm cell redesign
 
