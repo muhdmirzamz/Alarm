@@ -45,14 +45,16 @@ class SignupViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.present(alert, animated: true)
                 }
-            }
+            } 
             
-            if let _ = error {
+            if let error = error {
                 let alert = UIAlertController.init(title: "Error", message: "Invalid email", preferredStyle: .alert)
                 let okAction = UIAlertAction.init(title: "OK", style: .default) { action in
-                    // reset all the fields if email input is invalid
-                    self.emailTextfield.text = ""
-                    self.passwordTextfield.text = ""
+                    DispatchQueue.main.async {
+                        // reset all the fields if email input is invalid
+                        self.emailTextfield.text = ""
+                        self.passwordTextfield.text = ""
+                    }
                 }
                 
                 alert.addAction(okAction)
