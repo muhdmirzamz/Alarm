@@ -303,7 +303,8 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
                                     todoDict.setValue(newDict, forKey: todo.key!)
                                 }
 
-                                ref.child("/alarms/\(userId)").setValue(todoDict)
+                                let updates = ["/alarms/\(userId)": todoDict]
+                                ref.updateChildValues(updates)
 
                                 DispatchQueue.main.async {
                                     self.navigationController?.popViewController(animated: true)
