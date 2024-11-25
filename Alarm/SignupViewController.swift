@@ -47,7 +47,7 @@ class SignupViewController: UIViewController {
                 }
             } 
             
-            if let error = error {
+            if let _ = error {
                 let alert = UIAlertController.init(title: "Error", message: "Invalid email", preferredStyle: .alert)
                 let okAction = UIAlertAction.init(title: "OK", style: .default) { action in
                     DispatchQueue.main.async {
