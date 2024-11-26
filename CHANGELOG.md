@@ -1,5 +1,8 @@
 # CHANGELOG
 
+27 November 2024
+- Inputting the date is no longer necessary. Just pick a time.
+
 13 November 2024
 - Error message appears after wrong credentials on login
 

@@ -249,7 +249,7 @@
                                     <action selector="deleteAlarm" destination="Ieh-cI-FUt" eventType="touchUpInside" id="7t4-sM-ubv"/>
                                 </connections>
                             </button>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XXN-oN-tJn">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XXN-oN-tJn">
                                 <rect key="frame" x="63.666666666666657" y="408" width="266" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="266" id="IBa-v4-Aeg"/>
@@ -315,7 +315,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zD0-MZ-9p6">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zD0-MZ-9p6">
                                 <rect key="frame" x="63.666666666666657" y="408" width="266" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="266" id="KmM-si-dI8"/>

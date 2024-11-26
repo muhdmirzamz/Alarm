@@ -12,7 +12,8 @@ class Utilities {
         let dateFormatter = DateFormatter()
         
         dateFormatter.timeZone = TimeZone.autoupdatingCurrent
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'"
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'"
+        dateFormatter.dateFormat = "HH:mm"
         
         return dateFormatter.string(from: dateObject)
     }
@@ -21,7 +22,8 @@ class Utilities {
         let dateFormatter = DateFormatter()
         
         dateFormatter.timeZone = TimeZone.autoupdatingCurrent
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'"
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'"
+        dateFormatter.dateFormat = "HH:mm"
         
         return dateFormatter.date(from: dateString)!
     }

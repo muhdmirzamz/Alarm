@@ -44,6 +44,26 @@ class AddAlarmViewController: UIViewController {
     
     @IBAction func addAlarm() {
         
+        let calendar = Calendar.current
+        let utilities = Utilities()
+        
+        let selectedDate = utilities.getDateFromDateString(dateString: self.formattedTimestamp)
+        let todayDate = Date()
+        
+        var finalDate: Date
+        
+        // time has passed
+        if selectedDate > todayDate {
+            // set time to tomorrow
+            finalDate = calendar.date(byAdding: .day, value: 1, to: selectedDate)!
+        } else {
+            // set time to today
+            finalDate = selectedDate
+        }
+        
+        
+        
+        
         let ref = Database.database().reference()
         
         guard let alarmName = self.textfield.text else {
@@ -77,29 +97,14 @@ class AddAlarmViewController: UIViewController {
         content.sound = UNNotificationSound.default
         
         
-        let utilities = Utilities()
-        
-        // you need the dateComponents for the notification trigger
-        // to get that, you get the date object from converting the date string
-        let selectedDate = utilities.getDateFromDateString(dateString: self.formattedTimestamp)
-        
         // extract the components from that date object
-        let calendar = Calendar.current
-        let selectedDateYear = calendar.component(.year, from: selectedDate)
-        let selectedDateMonth = calendar.component(.month, from: selectedDate)
-        let selectedDateDay = calendar.component(.day, from: selectedDate)
-        let selectedDateHour = calendar.component(.hour, from: selectedDate)
-        let selectedDateMin = calendar.component(.minute, from: selectedDate)
-        let selectedDateSecond = calendar.component(.second, from: selectedDate)
+        let selectedDateHour = calendar.component(.hour, from: finalDate)
+        let selectedDateMin = calendar.component(.minute, from: finalDate)
         
         // input the components into a DateComponent object
         var dateComponents = DateComponents()
-        dateComponents.year = selectedDateYear
-        dateComponents.month = selectedDateMonth
-        dateComponents.day = selectedDateDay
         dateComponents.hour = selectedDateHour
         dateComponents.minute = selectedDateMin
-        dateComponents.second = selectedDateSecond
         dateComponents.timeZone = .current
         
         let trigger = UNCalendarNotificationTrigger.init(dateMatching: dateComponents, repeats: false)
