@@ -250,10 +250,7 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XXN-oN-tJn">
-                                <rect key="frame" x="63.666666666666657" y="408" width="266" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="266" id="IBa-v4-Aeg"/>
-                                </constraints>
+                                <rect key="frame" x="230" y="299" width="133" height="36"/>
                                 <connections>
                                     <action selector="pickerValueChangedWithSender:forEvent:" destination="Ieh-cI-FUt" eventType="valueChanged" id="9GX-YV-yes"/>
                                 </connections>
@@ -268,19 +265,20 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="che-qv-drH" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="0o8-WJ-BBb"/>
-                            <constraint firstItem="nje-UO-4rY" firstAttribute="top" secondItem="XXN-oN-tJn" secondAttribute="bottom" constant="324" id="1X2-cQ-xNJ"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" id="39Z-Vy-WpB"/>
                             <constraint firstAttribute="bottom" secondItem="nje-UO-4rY" secondAttribute="bottom" id="8RJ-yT-owG"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="trailing" secondItem="XF2-tS-BOQ" secondAttribute="trailing" id="BmH-xm-nrZ"/>
                             <constraint firstItem="K0m-23-SfT" firstAttribute="top" secondItem="che-qv-drH" secondAttribute="bottom" constant="53" id="DbX-9G-Yt5"/>
+                            <constraint firstItem="XXN-oN-tJn" firstAttribute="leading" secondItem="K0m-23-SfT" secondAttribute="trailing" constant="85" id="GdE-t0-7fF"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="trailing" secondItem="XF2-tS-BOQ" secondAttribute="trailing" id="HMA-g6-avP"/>
                             <constraint firstItem="XF2-tS-BOQ" firstAttribute="trailing" secondItem="che-qv-drH" secondAttribute="trailing" constant="30" id="IRB-K9-ofv"/>
                             <constraint firstItem="che-qv-drH" firstAttribute="top" secondItem="fp2-Jr-YmR" secondAttribute="bottom" constant="19" id="JQA-Jx-fpE"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" id="Jux-yb-0ka"/>
+                            <constraint firstItem="XXN-oN-tJn" firstAttribute="top" secondItem="che-qv-drH" secondAttribute="bottom" constant="45" id="Kvd-rr-XjR"/>
                             <constraint firstItem="fp2-Jr-YmR" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="LlI-tx-cvG"/>
                             <constraint firstAttribute="bottom" secondItem="nje-UO-4rY" secondAttribute="bottom" id="O5Q-Bj-to8"/>
                             <constraint firstItem="fp2-Jr-YmR" firstAttribute="top" secondItem="XF2-tS-BOQ" secondAttribute="top" constant="77" id="bwN-Is-jcr"/>
-                            <constraint firstItem="XXN-oN-tJn" firstAttribute="centerX" secondItem="Hal-eH-yPu" secondAttribute="centerX" id="ix5-SX-ug5"/>
+                            <constraint firstItem="XF2-tS-BOQ" firstAttribute="trailing" secondItem="XXN-oN-tJn" secondAttribute="trailing" constant="30" id="cfq-qS-2V4"/>
                             <constraint firstItem="K0m-23-SfT" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="vTt-Iz-dVN"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="centerX" secondItem="Hal-eH-yPu" secondAttribute="centerX" id="zRS-NL-RJa"/>
                         </constraints>
@@ -315,15 +313,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zD0-MZ-9p6">
-                                <rect key="frame" x="63.666666666666657" y="408" width="266" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="266" id="KmM-si-dI8"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="pickerValueChangedWithSender:forEvent:" destination="a0L-KI-i9N" eventType="valueChanged" id="YV9-xs-AvO"/>
-                                </connections>
-                            </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N49-fm-hew">
                                 <rect key="frame" x="31" y="180" width="114" height="21"/>
                                 <constraints>
@@ -342,15 +331,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zD0-MZ-9p6">
+                                <rect key="frame" x="230" y="299" width="133" height="36"/>
+                                <connections>
+                                    <action selector="pickerValueChangedWithSender:forEvent:" destination="a0L-KI-i9N" eventType="valueChanged" id="YV9-xs-AvO"/>
+                                </connections>
+                            </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kNE-kQ-kuF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="kNE-kQ-kuF" firstAttribute="trailing" secondItem="zD0-MZ-9p6" secondAttribute="trailing" constant="30" id="2bA-iz-Mif"/>
                             <constraint firstItem="kNE-kQ-kuF" firstAttribute="trailing" secondItem="Suj-hy-7gO" secondAttribute="trailing" constant="30" id="2sF-4L-PG1"/>
                             <constraint firstItem="N49-fm-hew" firstAttribute="top" secondItem="kNE-kQ-kuF" secondAttribute="top" constant="77" id="FCW-2Y-2mx"/>
-                            <constraint firstItem="zD0-MZ-9p6" firstAttribute="centerX" secondItem="44B-04-im1" secondAttribute="centerX" id="aun-KU-049"/>
                             <constraint firstItem="YO5-3h-uyq" firstAttribute="leading" secondItem="kNE-kQ-kuF" secondAttribute="leading" constant="31" id="bnx-hy-Pul"/>
-                            <constraint firstItem="kNE-kQ-kuF" firstAttribute="bottom" secondItem="zD0-MZ-9p6" secondAttribute="bottom" constant="374" id="he0-PB-21w"/>
+                            <constraint firstItem="zD0-MZ-9p6" firstAttribute="top" secondItem="Suj-hy-7gO" secondAttribute="bottom" constant="45" id="j2w-Da-tIq"/>
+                            <constraint firstItem="zD0-MZ-9p6" firstAttribute="leading" secondItem="YO5-3h-uyq" secondAttribute="trailing" constant="85" id="jrE-UD-G8R"/>
                             <constraint firstItem="Suj-hy-7gO" firstAttribute="leading" secondItem="kNE-kQ-kuF" secondAttribute="leading" constant="31" id="s5X-HC-AKL"/>
                             <constraint firstItem="Suj-hy-7gO" firstAttribute="top" secondItem="N49-fm-hew" secondAttribute="bottom" constant="19" id="tX1-Ns-96s"/>
                             <constraint firstItem="YO5-3h-uyq" firstAttribute="top" secondItem="Suj-hy-7gO" secondAttribute="bottom" constant="53" id="tZL-Af-9SG"/>
