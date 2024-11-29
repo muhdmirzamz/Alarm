@@ -47,7 +47,7 @@ class Utilities {
         let dateFormatter = DateFormatter()
         
         dateFormatter.timeZone = TimeZone.autoupdatingCurrent
-        dateFormatter.dateFormat = "dd/MM HH:mm"
+        dateFormatter.dateFormat = "HH:mm"
         
         return dateFormatter.string(from: dateObject)
     }
