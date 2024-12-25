@@ -105,7 +105,7 @@ class AddAlarmViewController: UIViewController {
         var dateComponents = DateComponents()
         dateComponents.hour = selectedDateHour
         dateComponents.minute = selectedDateMin
-        dateComponents.timeZone = .current
+        dateComponents.timeZone = .current        
         
         let trigger = UNCalendarNotificationTrigger.init(dateMatching: dateComponents, repeats: false)
         
@@ -126,8 +126,7 @@ class AddAlarmViewController: UIViewController {
         // we are doing this because firebase accepts NSDictionaries
         
         // *we will not be using count for now
-        
-        // create a starting dictionary with the new element having count 0
+                
         let todoDict: NSMutableDictionary = [
             key: [
                 "name": alarmName,
@@ -137,11 +136,7 @@ class AddAlarmViewController: UIViewController {
                 "timestamp": self.formattedTimestamp
             ]
         ]
-        
-        // start the next element with count 1
-//        var count = 1
-        
-        // loop through the existing array
+                
         for todo in self.alarmsArr {
             let newDict: [String: Any] = [
                 "name": todo.alarmName!,
@@ -150,10 +145,7 @@ class AddAlarmViewController: UIViewController {
                 "enabled": true,
                 "timestamp": todo.timestamp!
             ]
-            
-//            count += 1
-            
-            // add new element to the dictionary
+        
             todoDict.setValue(newDict, forKey: todo.key!)
         }
         
@@ -162,16 +154,5 @@ class AddAlarmViewController: UIViewController {
         
         self.navigationController?.popViewController(animated: true)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

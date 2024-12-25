@@ -1,5 +1,11 @@
 # CHANGELOG
 
+9 Dec 2024
+- You can now enable and disable alarms
+
+8 Dec 2024
+- Refactored code for editing alarms
+
 27 November 2024
 - Inputting the date is no longer necessary. Just pick a time.
 
