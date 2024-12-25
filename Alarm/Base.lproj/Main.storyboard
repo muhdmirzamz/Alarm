@@ -218,18 +218,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fp2-Jr-YmR">
-                                <rect key="frame" x="31" y="180" width="114" height="21"/>
+                                <rect key="frame" x="31" y="230" width="148" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="114" id="Rjk-kI-w0f"/>
+                                    <constraint firstAttribute="width" constant="148" id="Scg-LC-DFK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8X-BL-hef">
+                                <rect key="frame" x="31" y="152" width="148" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="148" id="urb-zf-fUB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0m-23-SfT">
-                                <rect key="frame" x="31" y="307" width="114" height="21"/>
+                                <rect key="frame" x="31" y="350" width="148" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="114" id="BU1-t5-7T4"/>
+                                    <constraint firstAttribute="width" constant="148" id="suM-CG-8ym"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -249,37 +258,47 @@
                                     <action selector="deleteAlarm" destination="Ieh-cI-FUt" eventType="touchUpInside" id="7t4-sM-ubv"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="che-qv-drH">
+                                <rect key="frame" x="31" y="280" width="332" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hk0-yB-Myi">
+                                <rect key="frame" x="314" y="147" width="51" height="31"/>
+                                <connections>
+                                    <action selector="switchValueChanged:" destination="Ieh-cI-FUt" eventType="valueChanged" id="kWe-Sz-r5u"/>
+                                </connections>
+                            </switch>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XXN-oN-tJn">
-                                <rect key="frame" x="230" y="299" width="133" height="36"/>
+                                <rect key="frame" x="198" y="342" width="165" height="36"/>
                                 <connections>
                                     <action selector="pickerValueChangedWithSender:forEvent:" destination="Ieh-cI-FUt" eventType="valueChanged" id="9GX-YV-yes"/>
                                 </connections>
                             </datePicker>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="che-qv-drH">
-                                <rect key="frame" x="31" y="220" width="332" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XF2-tS-BOQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="che-qv-drH" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="0o8-WJ-BBb"/>
+                            <constraint firstItem="fp2-Jr-YmR" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="2Xj-CD-bYV"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" id="39Z-Vy-WpB"/>
+                            <constraint firstItem="Q8X-BL-hef" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="5eG-VY-kXX"/>
+                            <constraint firstItem="K0m-23-SfT" firstAttribute="top" secondItem="che-qv-drH" secondAttribute="bottom" constant="36" id="5hF-Ah-gxS"/>
+                            <constraint firstItem="XF2-tS-BOQ" firstAttribute="trailing" secondItem="hk0-yB-Myi" secondAttribute="trailing" constant="30" id="5ud-kO-Yrb"/>
+                            <constraint firstItem="hk0-yB-Myi" firstAttribute="top" secondItem="XF2-tS-BOQ" secondAttribute="top" constant="44" id="8C2-dC-Yha"/>
                             <constraint firstAttribute="bottom" secondItem="nje-UO-4rY" secondAttribute="bottom" id="8RJ-yT-owG"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="trailing" secondItem="XF2-tS-BOQ" secondAttribute="trailing" id="BmH-xm-nrZ"/>
-                            <constraint firstItem="K0m-23-SfT" firstAttribute="top" secondItem="che-qv-drH" secondAttribute="bottom" constant="53" id="DbX-9G-Yt5"/>
-                            <constraint firstItem="XXN-oN-tJn" firstAttribute="leading" secondItem="K0m-23-SfT" secondAttribute="trailing" constant="85" id="GdE-t0-7fF"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="trailing" secondItem="XF2-tS-BOQ" secondAttribute="trailing" id="HMA-g6-avP"/>
-                            <constraint firstItem="XF2-tS-BOQ" firstAttribute="trailing" secondItem="che-qv-drH" secondAttribute="trailing" constant="30" id="IRB-K9-ofv"/>
-                            <constraint firstItem="che-qv-drH" firstAttribute="top" secondItem="fp2-Jr-YmR" secondAttribute="bottom" constant="19" id="JQA-Jx-fpE"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" id="Jux-yb-0ka"/>
-                            <constraint firstItem="XXN-oN-tJn" firstAttribute="top" secondItem="che-qv-drH" secondAttribute="bottom" constant="45" id="Kvd-rr-XjR"/>
-                            <constraint firstItem="fp2-Jr-YmR" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="LlI-tx-cvG"/>
+                            <constraint firstItem="K0m-23-SfT" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="MG7-Fq-SoD"/>
+                            <constraint firstItem="fp2-Jr-YmR" firstAttribute="top" secondItem="Q8X-BL-hef" secondAttribute="bottom" constant="57" id="Na7-Kr-f2B"/>
                             <constraint firstAttribute="bottom" secondItem="nje-UO-4rY" secondAttribute="bottom" id="O5Q-Bj-to8"/>
-                            <constraint firstItem="fp2-Jr-YmR" firstAttribute="top" secondItem="XF2-tS-BOQ" secondAttribute="top" constant="77" id="bwN-Is-jcr"/>
-                            <constraint firstItem="XF2-tS-BOQ" firstAttribute="trailing" secondItem="XXN-oN-tJn" secondAttribute="trailing" constant="30" id="cfq-qS-2V4"/>
-                            <constraint firstItem="K0m-23-SfT" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="vTt-Iz-dVN"/>
+                            <constraint firstItem="Q8X-BL-hef" firstAttribute="top" secondItem="XF2-tS-BOQ" secondAttribute="top" constant="49" id="X7e-8N-30m"/>
+                            <constraint firstItem="XF2-tS-BOQ" firstAttribute="trailing" secondItem="che-qv-drH" secondAttribute="trailing" constant="30" id="ZdQ-Kl-A1n"/>
+                            <constraint firstItem="che-qv-drH" firstAttribute="top" secondItem="fp2-Jr-YmR" secondAttribute="bottom" constant="29" id="gV1-nm-bfg"/>
+                            <constraint firstItem="XXN-oN-tJn" firstAttribute="leading" secondItem="K0m-23-SfT" secondAttribute="trailing" constant="19" id="jQS-4o-jjG"/>
+                            <constraint firstItem="XF2-tS-BOQ" firstAttribute="trailing" secondItem="XXN-oN-tJn" secondAttribute="trailing" constant="30" id="mFe-Q1-vyN"/>
+                            <constraint firstItem="XXN-oN-tJn" firstAttribute="top" secondItem="che-qv-drH" secondAttribute="bottom" constant="28" id="oAD-F1-NZJ"/>
+                            <constraint firstItem="che-qv-drH" firstAttribute="leading" secondItem="XF2-tS-BOQ" secondAttribute="leading" constant="31" id="s3z-Pr-FPw"/>
                             <constraint firstItem="nje-UO-4rY" firstAttribute="centerX" secondItem="Hal-eH-yPu" secondAttribute="centerX" id="zRS-NL-RJa"/>
                         </constraints>
                     </view>
@@ -293,6 +312,7 @@
                     <connections>
                         <outlet property="alarmNameTextfield" destination="che-qv-drH" id="gAY-1e-iMX"/>
                         <outlet property="datePicker" destination="XXN-oN-tJn" id="R2m-YE-NZq"/>
+                        <outlet property="enableSwitch" destination="hk0-yB-Myi" id="tIL-4E-gHy"/>
                         <outlet property="saveButton" destination="Aow-ZF-Be8" id="WQ4-dd-vdp"/>
                     </connections>
                 </viewController>
