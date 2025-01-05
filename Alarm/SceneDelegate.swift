@@ -7,10 +7,21 @@
 
 import UIKit
 
+import FirebaseAuth
+import FirebaseDatabase
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var response: UNNotificationResponse?
+    
+    // this is a custom function to handle notification tap from app delegate
+    func handleNotificationTap(_ response: UNNotificationResponse) {
+        
+        print("scene delegate custom method")
+        
+        self.response = response
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -39,6 +50,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        
+        print("scene entering foreground")
+        
+        guard let response = self.response else {
+            print("response is nothing")
+            
+            return
+        }
+        
+        print("most likely coming from a notification")
+        
+        let userInformation = response.notification.request.content.userInfo
+        
+        NotificationCenter.default.post(name: Notification.Name("RefreshData"), object: nil, userInfo: userInformation)
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

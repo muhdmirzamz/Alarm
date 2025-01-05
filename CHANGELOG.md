@@ -1,5 +1,8 @@
 # CHANGELOG
 
+30 Dec 2024
+- Alarm is now disabled after it has been executed
+
 9 Dec 2024
 - You can now enable and disable alarms
 

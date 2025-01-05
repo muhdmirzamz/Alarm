@@ -27,9 +27,20 @@ class AlarmListTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: Notification.Name("RefreshData"), object: nil)
     }
+    
+    
+    deinit {
+       // Remove observer
+       NotificationCenter.default.removeObserver(self, name: Notification.Name("RefreshData"), object: nil)
+   }
 
+    // does not get called when a user taps on a notification
     override func viewWillAppear(_ animated: Bool) {
+        print("[ ALARMS LIST VIEW  ] view will appear")
+        
         self.alarmsArr.removeAll()
         
         let ref = Database.database().reference()
@@ -104,6 +115,124 @@ class AlarmListTableViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    @objc func updateUI(notification: Notification) {
+                
+        print("Updating enabled property")
+        
+        guard let userInfo = notification.userInfo else {
+            return
+        }
+        
+        print(userInfo)
+        
+        // update the enabled property
+        let ref = Database.database().reference()
+        
+        guard let userId = userInfo["userId"] as? String else {
+            return
+        }
+        
+        print("user id: \(userId)")
+        
+        guard let alarmId = userInfo["alarmId"] as? String else {
+            return
+        }
+        
+        print("alarmId: \(alarmId)")
+        
+        let updates = [
+            "/alarms/\(userId)/\(alarmId)/enabled": false,
+        ]
+        
+        print("updating child values")
+        
+        ref.updateChildValues(updates) { error, ref in
+            if let error = error {
+                print("Error updating database: \(error.localizedDescription)")
+            } else {
+                
+                print("Fetching all data now")
+                
+                // re-fetch all the data
+                self.alarmsArr.removeAll()
+                
+                ref.child("/alarms").child(userId).observeSingleEvent(of: .value) { snapshot  in
+                    if let alarmsDict = snapshot.value as? NSDictionary {
+                        for i in alarmsDict {
+                            
+                            guard let alarmDict = i.value as? NSDictionary else {
+                                return
+                            }
+                            
+                            guard let alarmName = alarmDict["name"] as? String else {
+                                return
+                            }
+                            
+                            guard let alarmIsEnabled = alarmDict["enabled"] as? Bool else {
+                                return
+                            }
+                            
+                            guard let alarmTimestamp = alarmDict["timestamp"] as? String else {
+                                return
+                            }
+                            
+                            let alarmObj = Alarm()
+                            
+                            alarmObj.key = i.key as? String
+                            alarmObj.alarmName = alarmName
+                            alarmObj.enabled = alarmIsEnabled
+                            alarmObj.timestamp = alarmTimestamp
+                            
+                            self.alarmsArr.append(alarmObj)
+                        }
+                        
+                        for alarm in self.alarmsArr {
+                            print("\(alarm.alarmName) is \(alarm.enabled)")
+                        }
+                        
+                        let utilities = Utilities()
+                        
+                        // we are sorting using the timestamp variable
+                        // but we need to convert it to a Date type
+                        self.alarmsArr.sort(by: { alarm1, alarm2 in
+                            
+                            // timestamp is an optional
+                            guard let alarm1Timestamp = alarm1.timestamp else {
+                                return false
+                            }
+                            
+                            // the date function returns a Date object, not an optional
+                            let date1 = utilities.getDateFromDateString(dateString: alarm1Timestamp)
+                            
+                            guard let alarm2Timestamp = alarm2.timestamp else {
+                                return false
+                            }
+                            
+                            let date2 = utilities.getDateFromDateString(dateString: alarm2Timestamp)
+                            
+                            return date1 < date2
+                        })
+                        
+                        print("reloading table view")
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    } else {
+                        // there is no data
+                        
+                        // we have already removed all data in alarms array
+                        // so we should remember to reload data here
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+    
     }
     
     // MARK: - Table view data source

@@ -95,6 +95,10 @@ class AddAlarmViewController: UIViewController {
         content.title = alarmName
         content.body = "ALARM"
         content.sound = UNNotificationSound.default
+        content.userInfo = [
+            "userId": userId,
+            "alarmId": key,
+        ]
         
         
         // extract the components from that date object

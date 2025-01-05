@@ -51,6 +51,10 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
         self.inputDate = convertedDate
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("[ ALARMS DETAIL VIEW  ] view will appear")
+    }
+    
     @IBAction func switchValueChanged(_ sender : UISwitch!){
         
         if self.enableSwitch.isOn != self.alarm.enabled {
@@ -223,6 +227,10 @@ class AlarmDetailsViewController: UIViewController, UITextFieldDelegate {
                     content.title = alarmName
                     content.body = "ALARM"
                     content.sound = UNNotificationSound.default
+                    content.userInfo = [
+                        "userId": userId,
+                        "alarmId": alarmId,
+                    ]
                     
                     // you need the dateComponents for the notification trigger
                     // extract the components from that date object
