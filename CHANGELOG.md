@@ -1,5 +1,10 @@
 # CHANGELOG
 
+
+7 Jan 2025
+- The same alarms will now be downloaded to every device with the same account
+- Fix: The correct enabled property will now be reflected when you add an alarm
+
 30 Dec 2024
 - Alarm is now disabled after it has been executed
 

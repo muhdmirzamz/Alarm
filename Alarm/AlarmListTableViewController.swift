@@ -39,17 +39,30 @@ class AlarmListTableViewController: UITableViewController {
 
     // does not get called when a user taps on a notification
     override func viewWillAppear(_ animated: Bool) {
+        
+        // remove local
+        // clear pending notifications
+        // get firebase
+        // fill local
+        // sort local
+        // loop through local
+            // check enabled
+                // create the notification
+        
         print("[ ALARMS LIST VIEW  ] view will appear")
         
         self.alarmsArr.removeAll()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         
         let ref = Database.database().reference()
         
-        guard let userid = Auth.auth().currentUser?.uid else {
+        guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
         
-        ref.child("/alarms").child(userid).observeSingleEvent(of: .value) { snapshot  in
+        let calendar = Calendar.current
+        
+        ref.child("/alarms").child(userId).observeSingleEvent(of: .value) { snapshot  in
             if let alarmsDict = snapshot.value as? NSDictionary {
                 for i in alarmsDict {
                     
@@ -79,6 +92,10 @@ class AlarmListTableViewController: UITableViewController {
                     self.alarmsArr.append(alarmObj)
                 }
                 
+                for alarm in self.alarmsArr {
+                    print("\(alarm.alarmName!) is \(alarm.enabled!)")
+                }
+                
                 let utilities = Utilities()
                 
                 // we are sorting using the timestamp variable
@@ -101,6 +118,47 @@ class AlarmListTableViewController: UITableViewController {
                     
                     return date1 < date2
                 })
+                   
+                
+                for alarm in self.alarmsArr {
+                    if alarm.enabled == true {
+                        // create notification content
+                        let content = UNMutableNotificationContent()
+                        content.title = alarm.alarmName!
+                        content.body = "ALARM"
+                        content.sound = UNNotificationSound.default
+                        content.userInfo = [
+                            "userId": userId,
+                            "alarmId": alarm.key!,
+                        ]
+                        
+                        let utilities = Utilities()
+                        let alarmDate = utilities.getDateFromDateString(dateString: alarm.timestamp!)
+                        
+                        // extract the components from that date object
+                        let selectedDateHour = calendar.component(.hour, from: alarmDate)
+                        let selectedDateMin = calendar.component(.minute, from: alarmDate)
+                        
+                        // input the components into a DateComponent object
+                        var dateComponents = DateComponents()
+                        dateComponents.hour = selectedDateHour
+                        dateComponents.minute = selectedDateMin
+                        dateComponents.timeZone = .current
+                        
+                        let trigger = UNCalendarNotificationTrigger.init(dateMatching: dateComponents, repeats: false)
+                        
+                        // we will be using the key from firebase as the alarm identifier
+                        let request = UNNotificationRequest.init(identifier: alarm.key!, content: content, trigger: trigger)
+                        
+                        UNUserNotificationCenter.current().add(request) { error in
+                            if let _ = error {
+//                                print("Error: unable to create request")
+                            } else {
+//                                print("Success: request created successfully")
+                            }
+                        }
+                    }
+                }
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -189,7 +247,7 @@ class AlarmListTableViewController: UITableViewController {
                         }
                         
                         for alarm in self.alarmsArr {
-                            print("\(alarm.alarmName) is \(alarm.enabled)")
+                            print("\(alarm.alarmName!) is \(alarm.enabled!)")
                         }
                         
                         let utilities = Utilities()
