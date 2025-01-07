@@ -141,16 +141,16 @@ class AddAlarmViewController: UIViewController {
             ]
         ]
                 
-        for todo in self.alarmsArr {
+        for alarm in self.alarmsArr {
             let newDict: [String: Any] = [
-                "name": todo.alarmName!,
-                "key": todo.key!,
+                "name": alarm.alarmName!,
+                "key": alarm.key!,
 //                "order": count,
-                "enabled": true,
-                "timestamp": todo.timestamp!
+                "enabled": alarm.enabled!,
+                "timestamp": alarm.timestamp!
             ]
         
-            todoDict.setValue(newDict, forKey: todo.key!)
+            todoDict.setValue(newDict, forKey: alarm.key!)
         }
         
         let updates = ["/alarms/\(userId)": todoDict]
