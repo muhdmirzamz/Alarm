@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+27 Jan 2025
+- The loading screen now appears after you tap on a notification as well
+- There is now a popup that indicates when an alarm has been added successfully
+
+14 Jan 2025
+- There is now a loading screen when loading the table view
+
 7 Jan 2025
 - The same alarms will now be downloaded to every device with the same account
 - Fix: The correct enabled property will now be reflected when you add an alarm

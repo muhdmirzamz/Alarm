@@ -17,7 +17,14 @@ class AlarmListTableViewController: UITableViewController {
     @IBOutlet var editButton: UIBarButtonItem!
     @IBOutlet var addButton: UIBarButtonItem!
     
+    // we shall be adding the loading screen overlay programmatically
+    // we need to re-architect the navigation if we want to do it via storyboard
+    let loadingView = UIView()
+    let spinner = UIActivityIndicatorView()
+    let loadingLabel = UILabel()
+    
     var alarmsArr: [Alarm] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +42,58 @@ class AlarmListTableViewController: UITableViewController {
     deinit {
        // Remove observer
        NotificationCenter.default.removeObserver(self, name: Notification.Name("RefreshData"), object: nil)
-   }
+    }
 
+    func showLoadingUI() {
+        // Sets loading view
+        let width: CGFloat = 120
+        let height: CGFloat = 30
+        let x = (tableView.frame.width / 2) - (width / 2)
+        let y = (tableView.frame.height / 2) - (height / 2) - (self.navigationController?.navigationBar.frame.height)!
+        self.loadingView.frame = CGRect(x: x, y: y, width: width, height: height)
+        
+        // Sets loading text
+        self.loadingLabel.textColor = .gray
+        self.loadingLabel.textAlignment = .center
+        self.loadingLabel.text = "Loading..."
+        self.loadingLabel.frame = CGRect(x: 0, y: 0, width: 140, height: 30)
+        
+        // Sets spinner
+        self.spinner.style = .medium
+        self.spinner.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        self.spinner.startAnimating()
+        
+        
+        // Adds text and spinner to the view
+        self.loadingView.addSubview(self.loadingLabel)
+        self.loadingView.addSubview(self.spinner)
+
+        self.tableView.addSubview(self.loadingView)
+    }
+    
+    func dismissLoadingUI() {
+        self.spinner.stopAnimating()
+        self.spinner.removeFromSuperview()
+        self.loadingLabel.removeFromSuperview()
+        
+        self.loadingView.removeFromSuperview()
+    }
+    
+    
     // does not get called when a user taps on a notification
     override func viewWillAppear(_ animated: Bool) {
+        
+        /*
+            sets loading screen
+         */
+        // we shall be adding the loading screen overlay programmatically
+        // we need to re-architect the navigation if we want to do it via storyboard
+        
+        // makes sure the table view displays nothing before it loads and while it loads
+        self.alarmsArr.removeAll()
+        self.tableView.reloadData()
+    
+        self.showLoadingUI()
         
         // remove local
         // clear pending notifications
@@ -162,6 +217,9 @@ class AlarmListTableViewController: UITableViewController {
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    
+                    // remove loading screen from UI
+                    self.dismissLoadingUI()
                 }
             } else {
                 // there is no data
@@ -170,6 +228,9 @@ class AlarmListTableViewController: UITableViewController {
                 // so we should remember to reload data here
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    
+                    // remove loading screen from UI
+                    self.dismissLoadingUI()
                 }
             }
         }
@@ -205,6 +266,11 @@ class AlarmListTableViewController: UITableViewController {
         ]
         
         print("updating child values")
+        
+        self.alarmsArr.removeAll()
+        self.tableView.reloadData()
+        
+        self.showLoadingUI()
         
         ref.updateChildValues(updates) { error, ref in
             if let error = error {
@@ -277,6 +343,8 @@ class AlarmListTableViewController: UITableViewController {
                         
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
+                            
+                            self.dismissLoadingUI()
                         }
                     } else {
                         // there is no data
@@ -285,6 +353,8 @@ class AlarmListTableViewController: UITableViewController {
                         // so we should remember to reload data here
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
+                            
+                            self.dismissLoadingUI()
                         }
                     }
                 }

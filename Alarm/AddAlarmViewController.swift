@@ -155,8 +155,18 @@ class AddAlarmViewController: UIViewController {
         
         let updates = ["/alarms/\(userId)": todoDict]
         ref.updateChildValues(updates)
-        
-        self.navigationController?.popViewController(animated: true)
+        ref.updateChildValues(updates) { error, ref in
+            if error == nil {
+                let alertController = UIAlertController.init(title: "Alarm successfully added", message: "", preferredStyle: .alert)
+                let alertAction = UIAlertAction.init(title: "OK", style: .default) { action in
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
+                alertController.addAction(alertAction)
+                
+                self.present(alertController, animated: true)
+            }
+        }
     }
 
 }
